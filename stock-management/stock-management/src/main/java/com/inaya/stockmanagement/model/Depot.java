@@ -16,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "depot")
 public class Depot {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
