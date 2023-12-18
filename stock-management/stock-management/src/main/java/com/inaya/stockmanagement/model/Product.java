@@ -1,11 +1,13 @@
 package com.inaya.stockmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,5 +33,20 @@ public class Product {
 
     @Column(name = "margin")
     private BigDecimal margin;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "productList",fetch = FetchType.EAGER)
+    private List<Depot> depotList;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "supllier_id", referencedColumnName = "id")
+    private Supplier supplier;
+
 
 }

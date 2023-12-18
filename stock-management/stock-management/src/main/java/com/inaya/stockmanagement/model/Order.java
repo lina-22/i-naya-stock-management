@@ -1,5 +1,6 @@
 package com.inaya.stockmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -27,4 +30,8 @@ public class Order {
 
     @Column(name = "vat")
     private BigDecimal vat;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    private Set<OrderDetails> orderDetails = new HashSet<>();
 }
