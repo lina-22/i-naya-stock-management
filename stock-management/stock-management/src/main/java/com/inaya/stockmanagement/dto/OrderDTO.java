@@ -1,5 +1,6 @@
 package com.inaya.stockmanagement.dto;
 
+import com.inaya.stockmanagement.model.OrderDetails;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -17,6 +18,6 @@ public class OrderDTO {
 
     private BigDecimal vat;
 
-    private Set<OrderDetailsDTO> orderDetails;
+    private Set<OrderDetails> orderDetails;
 
 }

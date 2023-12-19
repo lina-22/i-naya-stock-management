@@ -1,5 +1,6 @@
 package com.inaya.stockmanagement.dto;
 
+import com.inaya.stockmanagement.model.Product;
 import lombok.Data;
 
 import java.util.Set;
@@ -9,6 +10,6 @@ public class CategoryDTO {
 
     private Long id;
     private String name;
-    private Set<ProductDTO> productSet;
+    private Set<Product> productSet;
 
 }

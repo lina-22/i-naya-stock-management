@@ -8,19 +8,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SupplierServiceImpl implements SupplierService{
+public class SupplierServiceImpl implements SupplierService {
+
     private final SupplierRepository supplierRepository;
 
-    SupplierServiceImpl(SupplierRepository supplierRepository){
-        this.supplierRepository=supplierRepository;
+    public SupplierServiceImpl(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
     }
+
     /**
      * @param supplier
      * @return
      */
     @Override
     public Supplier add(Supplier supplier) {
-
         return supplierRepository.save(supplier);
     }
 
@@ -29,8 +30,7 @@ public class SupplierServiceImpl implements SupplierService{
      * @return
      */
     @Override
-    public Supplier update(Supplier supplier)
-    {
+    public Supplier update(Supplier supplier) {
         return supplierRepository.saveAndFlush(supplier);
     }
 
@@ -39,7 +39,6 @@ public class SupplierServiceImpl implements SupplierService{
      */
     @Override
     public List<Supplier> getAll() {
-
         return supplierRepository.findAll();
     }
 
@@ -49,7 +48,6 @@ public class SupplierServiceImpl implements SupplierService{
      */
     @Override
     public Optional<Supplier> findById(Long id) {
-
         return supplierRepository.findById(id);
     }
 

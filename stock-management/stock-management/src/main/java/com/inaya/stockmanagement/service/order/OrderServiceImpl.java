@@ -8,19 +8,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
+
     private final OrderRepository orderRepository;
 
-    OrderServiceImpl(OrderRepository orderRepository){
-        this.orderRepository=orderRepository;
+    public OrderServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
+
+
     /**
      * @param order
      * @return
      */
     @Override
     public Order add(Order order) {
-
         return orderRepository.save(order);
     }
 
@@ -30,7 +32,6 @@ public class OrderServiceImpl implements OrderService{
      */
     @Override
     public Order update(Order order) {
-
         return orderRepository.saveAndFlush(order);
     }
 
@@ -39,7 +40,6 @@ public class OrderServiceImpl implements OrderService{
      */
     @Override
     public List<Order> getAll() {
-
         return orderRepository.findAll();
     }
 
@@ -49,7 +49,6 @@ public class OrderServiceImpl implements OrderService{
      */
     @Override
     public Optional<Order> findById(Long id) {
-
         return orderRepository.findById(id);
     }
 
@@ -58,7 +57,6 @@ public class OrderServiceImpl implements OrderService{
      */
     @Override
     public void delete(Long id) {
-
         orderRepository.deleteById(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.inaya.stockmanagement.dto;
 
+import com.inaya.stockmanagement.model.Depot;
 import lombok.Data;
 
 @Data
@@ -9,6 +10,6 @@ public class StockDTO {
 
     private int quantity;
 
-    private DepotDTO depot;
+    private Depot depot;
 
 }

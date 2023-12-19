@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
 
-    UserServiceImpl(UserRepository userRepository){
-        this.userRepository=userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     /**
@@ -21,7 +22,6 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public User add(User user) {
-
         return userRepository.save(user);
     }
 
@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public User update(User user) {
-
         return userRepository.saveAndFlush(user);
     }
 
@@ -40,7 +39,6 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public List<User> getAll() {
-
         return userRepository.findAll();
     }
 
@@ -59,6 +57,5 @@ public class UserServiceImpl implements UserService{
     @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
-
     }
 }

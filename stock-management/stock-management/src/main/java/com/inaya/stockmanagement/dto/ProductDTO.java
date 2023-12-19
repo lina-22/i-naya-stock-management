@@ -1,6 +1,8 @@
 package com.inaya.stockmanagement.dto;
 
+import com.inaya.stockmanagement.model.Category;
 import com.inaya.stockmanagement.model.Depot;
+import com.inaya.stockmanagement.model.Supplier;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -23,8 +25,8 @@ public class ProductDTO {
 
     private List<Depot> depotList;
 
-    private CategoryDTO category;
+    private Category category;
 
-    private SupplierDTO supplier;
+    private Supplier supplier;
 
 }

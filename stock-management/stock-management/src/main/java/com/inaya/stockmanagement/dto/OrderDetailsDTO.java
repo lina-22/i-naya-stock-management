@@ -1,5 +1,6 @@
 package com.inaya.stockmanagement.dto;
 
+import com.inaya.stockmanagement.model.Order;
 import lombok.Data;
 
 @Data
@@ -13,6 +14,6 @@ public class OrderDetailsDTO {
 
     private int unitPrice;
 
-    private OrderDTO order;
+    private Order order;
 
 }

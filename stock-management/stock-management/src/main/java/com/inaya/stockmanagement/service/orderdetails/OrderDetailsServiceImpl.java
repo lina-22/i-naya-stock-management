@@ -8,19 +8,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderDetailsServiceImpl implements OrderDetailsService{
+public class OrderDetailsServiceImpl implements OrderDetailsService {
+
     private final OrderDetailsRepository orderDetailsRepository;
 
-    OrderDetailsServiceImpl(OrderDetailsRepository orderDetailsRepository){
-        this.orderDetailsRepository =orderDetailsRepository;
+    public OrderDetailsServiceImpl(OrderDetailsRepository orderDetailsRepository) {
+        this.orderDetailsRepository = orderDetailsRepository;
     }
+
+
     /**
      * @param orderDetails
      * @return
      */
     @Override
     public OrderDetails add(OrderDetails orderDetails) {
-
         return orderDetailsRepository.save(orderDetails);
     }
 
@@ -38,7 +40,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
      */
     @Override
     public List<OrderDetails> getAll() {
-
         return orderDetailsRepository.findAll();
     }
 
@@ -48,7 +49,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
      */
     @Override
     public Optional<OrderDetails> findById(Long id) {
-
         return orderDetailsRepository.findById(id);
     }
 
@@ -57,7 +57,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
      */
     @Override
     public void delete(Long id) {
-
         orderDetailsRepository.deleteById(id);
     }
 }

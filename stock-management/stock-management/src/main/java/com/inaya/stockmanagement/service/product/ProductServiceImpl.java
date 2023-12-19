@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
+
     private final ProductRepository productRepository;
 
-    ProductServiceImpl(ProductRepository productRepository){
-        this.productRepository=productRepository;
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
-
 
     /**
      * @param product
@@ -22,7 +22,6 @@ public class ProductServiceImpl implements ProductService{
      */
     @Override
     public Product add(Product product) {
-
         return productRepository.save(product);
     }
 
@@ -32,7 +31,6 @@ public class ProductServiceImpl implements ProductService{
      */
     @Override
     public Product update(Product product) {
-
         return productRepository.saveAndFlush(product);
     }
 
@@ -41,7 +39,6 @@ public class ProductServiceImpl implements ProductService{
      */
     @Override
     public List<Product> getAll() {
-
         return productRepository.findAll();
     }
 
@@ -51,7 +48,6 @@ public class ProductServiceImpl implements ProductService{
      */
     @Override
     public Optional<Product> findById(Long id) {
-
         return productRepository.findById(id);
     }
 
@@ -60,7 +56,6 @@ public class ProductServiceImpl implements ProductService{
      */
     @Override
     public void delete(Long id) {
-
         productRepository.deleteById(id);
     }
 }

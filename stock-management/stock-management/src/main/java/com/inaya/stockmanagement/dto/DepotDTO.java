@@ -1,5 +1,7 @@
 package com.inaya.stockmanagement.dto;
 
+import com.inaya.stockmanagement.model.Product;
+import com.inaya.stockmanagement.model.Stock;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -19,8 +21,8 @@ public class DepotDTO {
 
     private String phone;
 
-    private Set<StockDTO> stock = new HashSet<>();
+    private Set<Stock> stock = new HashSet<>();
 
-    private List<ProductDTO> productList;
+    private List<Product> productList;
 
 }

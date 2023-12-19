@@ -8,18 +8,20 @@ import java.util.List;
 import java.util.Optional;
 @Service
 public class DepotServiceImpl implements DepotService{
+
     private final DepotRepository depotRepository;
 
-    DepotServiceImpl(DepotRepository depotRepository){
-        this.depotRepository =depotRepository;
+    public DepotServiceImpl(DepotRepository depotRepository) {
+        this.depotRepository = depotRepository;
     }
+
+
     /**
      * @param depot
      * @return
      */
     @Override
     public Depot add(Depot depot) {
-
         return depotRepository.save(depot);
     }
 
@@ -29,7 +31,6 @@ public class DepotServiceImpl implements DepotService{
      */
     @Override
     public Depot update(Depot depot) {
-
         return depotRepository.saveAndFlush(depot);
     }
 
@@ -38,7 +39,6 @@ public class DepotServiceImpl implements DepotService{
      */
     @Override
     public List<Depot> getAll() {
-
         return depotRepository.findAll();
     }
 
@@ -48,7 +48,6 @@ public class DepotServiceImpl implements DepotService{
      */
     @Override
     public Optional<Depot> findById(Long id) {
-
         return depotRepository.findById(id);
     }
 
@@ -58,6 +57,5 @@ public class DepotServiceImpl implements DepotService{
     @Override
     public void delete(Long id) {
         depotRepository.deleteById(id);
-
     }
 }
