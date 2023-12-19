@@ -1,6 +1,7 @@
 package com.inaya.stockmanagement.service.product;
 
 import com.inaya.stockmanagement.model.Product;
+import com.inaya.stockmanagement.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,13 +9,21 @@ import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService{
+    private final ProductRepository productRepository;
+
+    ProductServiceImpl(ProductRepository productRepository){
+        this.productRepository=productRepository;
+    }
+
+
     /**
      * @param product
      * @return
      */
     @Override
     public Product add(Product product) {
-        return null;
+
+        return productRepository.save(product);
     }
 
     /**
@@ -23,7 +32,8 @@ public class ProductServiceImpl implements ProductService{
      */
     @Override
     public Product update(Product product) {
-        return null;
+
+        return productRepository.saveAndFlush(product);
     }
 
     /**
@@ -31,7 +41,8 @@ public class ProductServiceImpl implements ProductService{
      */
     @Override
     public List<Product> getAll() {
-        return null;
+
+        return productRepository.findAll();
     }
 
     /**
@@ -40,7 +51,8 @@ public class ProductServiceImpl implements ProductService{
      */
     @Override
     public Optional<Product> findById(Long id) {
-        return Optional.empty();
+
+        return productRepository.findById(id);
     }
 
     /**
@@ -49,5 +61,6 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void delete(Long id) {
 
+        productRepository.deleteById(id);
     }
 }

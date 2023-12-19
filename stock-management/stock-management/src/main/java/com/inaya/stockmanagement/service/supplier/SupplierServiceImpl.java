@@ -1,6 +1,7 @@
 package com.inaya.stockmanagement.service.supplier;
 
 import com.inaya.stockmanagement.model.Supplier;
+import com.inaya.stockmanagement.repository.SupplierRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,13 +9,19 @@ import java.util.Optional;
 
 @Service
 public class SupplierServiceImpl implements SupplierService{
+    private final SupplierRepository supplierRepository;
+
+    SupplierServiceImpl(SupplierRepository supplierRepository){
+        this.supplierRepository=supplierRepository;
+    }
     /**
      * @param supplier
      * @return
      */
     @Override
     public Supplier add(Supplier supplier) {
-        return null;
+
+        return supplierRepository.save(supplier);
     }
 
     /**
@@ -22,8 +29,9 @@ public class SupplierServiceImpl implements SupplierService{
      * @return
      */
     @Override
-    public Supplier update(Supplier supplier) {
-        return null;
+    public Supplier update(Supplier supplier)
+    {
+        return supplierRepository.saveAndFlush(supplier);
     }
 
     /**
@@ -31,7 +39,8 @@ public class SupplierServiceImpl implements SupplierService{
      */
     @Override
     public List<Supplier> getAll() {
-        return null;
+
+        return supplierRepository.findAll();
     }
 
     /**
@@ -40,7 +49,8 @@ public class SupplierServiceImpl implements SupplierService{
      */
     @Override
     public Optional<Supplier> findById(Long id) {
-        return Optional.empty();
+
+        return supplierRepository.findById(id);
     }
 
     /**
@@ -48,6 +58,6 @@ public class SupplierServiceImpl implements SupplierService{
      */
     @Override
     public void delete(Long id) {
-
+        supplierRepository.deleteById(id);
     }
 }

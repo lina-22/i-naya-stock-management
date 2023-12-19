@@ -1,6 +1,7 @@
 package com.inaya.stockmanagement.service.stock;
 
 import com.inaya.stockmanagement.model.Stock;
+import com.inaya.stockmanagement.repository.StockRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,13 +9,19 @@ import java.util.Optional;
 
 @Service
 public class StockServiceImpl implements StockService{
+    private final StockRepository stockRepository;
+
+    StockServiceImpl(StockRepository stockRepository){
+        this.stockRepository=stockRepository;
+    }
     /**
      * @param stock
      * @return
      */
     @Override
     public Stock add(Stock stock) {
-        return null;
+
+        return stockRepository.save(stock);
     }
 
     /**
@@ -23,7 +30,8 @@ public class StockServiceImpl implements StockService{
      */
     @Override
     public Stock update(Stock stock) {
-        return null;
+
+        return stockRepository.saveAndFlush(stock);
     }
 
     /**
@@ -31,7 +39,7 @@ public class StockServiceImpl implements StockService{
      */
     @Override
     public List<Stock> getAll() {
-        return null;
+        return stockRepository.findAll();
     }
 
     /**
@@ -40,7 +48,8 @@ public class StockServiceImpl implements StockService{
      */
     @Override
     public Optional<Stock> findById(Long id) {
-        return Optional.empty();
+
+        return stockRepository.findById(id);
     }
 
     /**
@@ -48,6 +57,7 @@ public class StockServiceImpl implements StockService{
      */
     @Override
     public void delete(Long id) {
+        stockRepository.deleteById(id);
 
     }
 }

@@ -1,6 +1,7 @@
 package com.inaya.stockmanagement.service.user;
 
 import com.inaya.stockmanagement.model.User;
+import com.inaya.stockmanagement.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,13 +9,20 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
+    private final UserRepository userRepository;
+
+    UserServiceImpl(UserRepository userRepository){
+        this.userRepository=userRepository;
+    }
+
     /**
      * @param user
      * @return
      */
     @Override
     public User add(User user) {
-        return null;
+
+        return userRepository.save(user);
     }
 
     /**
@@ -23,7 +31,8 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public User update(User user) {
-        return null;
+
+        return userRepository.saveAndFlush(user);
     }
 
     /**
@@ -31,7 +40,8 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public List<User> getAll() {
-        return null;
+
+        return userRepository.findAll();
     }
 
     /**
@@ -40,7 +50,7 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public Optional<User> findById(Long id) {
-        return Optional.empty();
+        return userRepository.findById(id);
     }
 
     /**
@@ -48,6 +58,7 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public void delete(Long id) {
+        userRepository.deleteById(id);
 
     }
 }
