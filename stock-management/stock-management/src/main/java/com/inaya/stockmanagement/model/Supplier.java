@@ -1,9 +1,12 @@
 package com.inaya.stockmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @Entity
@@ -27,5 +30,9 @@ public class Supplier {
 
     @Column(name = "phone")
     private String phone;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY)
+    private Set<Product> productSet;
 
 }

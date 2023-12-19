@@ -33,5 +33,5 @@ public class Order {
 
     @JsonIgnore
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    private Set<OrderDetails> orderDetails = new HashSet<>();
+    private Set<OrderDetails> orderDetails;
 }

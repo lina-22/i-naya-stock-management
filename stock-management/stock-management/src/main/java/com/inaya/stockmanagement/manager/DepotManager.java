@@ -77,8 +77,8 @@ public class DepotManager {
         depotDTO.setAddress(depot.getAddress());
         depotDTO.setEmail(depot.getEmail());
         depotDTO.setPhone(depot.getPhone());
-        depotDTO.setProductList(depot.getProductList());
-        depotDTO.setStock(depot.getStock());
+        //depotDTO.setProductList(depot.getProductList());
+        //depotDTO.setStock(depot.getStock());
         return depotDTO;
     }
 

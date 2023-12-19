@@ -33,17 +33,20 @@ public class Depot {
     @Column(name = "phone")
     private String phone;
 
-
-    @OneToMany(mappedBy = "depot", fetch = FetchType.LAZY)
-    private Set<Stock> stock = new HashSet<>();
-
     @JsonIgnore
+    @OneToMany(mappedBy = "depot", fetch = FetchType.LAZY)
+    private Set<Stock> stocks;
+
+    /*@OneToMany(mappedBy = "depot", fetch = FetchType.LAZY)
+    private List<Stock> stock;*/
+
+    /*@JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "depot_product",
             joinColumns = @JoinColumn(name = "depot_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id")
     )
-    private List<Product> productList;
+    private List<Product> productList;*/
 
 }

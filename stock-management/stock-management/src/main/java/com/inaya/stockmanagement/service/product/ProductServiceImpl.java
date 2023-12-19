@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Product add(Product product) {
-        return productRepository.save(product);
+        return productRepository.saveAndFlush(product);
     }
 
     /**
@@ -49,6 +49,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
+    }
+
+    /**
+     * @param name
+     * @return
+     */
+    @Override
+    public Optional<Product> findByName(String name) {
+        return productRepository.findByName(name);
     }
 
     /**

@@ -25,6 +25,6 @@ public class Category {
 
     @JsonIgnore
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    private Set<Product> productSet = new HashSet<>();
+    private Set<Product> productSet;
 
 }
