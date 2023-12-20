@@ -56,7 +56,11 @@ public class ProductManager {
 
         if (category.isPresent() && depot.isPresent() && supplier.isPresent()) {
 
-
+            //new stock -
+            Stock stock = new Stock();
+            stock.setQuantity(productReqDTO.getQuantity());
+            stock.setDepot(depot.get());
+            Stock addedStock = stockService.add(stock);
 
             Product productToAdd = new Product();
             productToAdd.setName(productReqDTO.getName());
@@ -64,17 +68,13 @@ public class ProductManager {
             productToAdd.setCost(productReqDTO.getCost());
             productToAdd.setMargin(productReqDTO.getMargin());
             productToAdd.setDescription(productReqDTO.getDescription());
+            productToAdd.setStocks(List.of(addedStock));
             productToAdd.setCategory(category.get());
             productToAdd.setSupplier(supplier.get());
 
             Product addedProduct = productService.add(productToAdd);
 
-            //new stock -
-            Stock stock = new Stock();
-            stock.setQuantity(productReqDTO.getQuantity());
-            stock.setDepot(depot.get());
-            stock.setProduct(addedProduct);
-            stockService.add(stock);
+
 
             Product product1 = productService.findById(addedProduct.getId()).get();
             return new ResponseEntity<>(toDto(product1), HttpStatus.CREATED);

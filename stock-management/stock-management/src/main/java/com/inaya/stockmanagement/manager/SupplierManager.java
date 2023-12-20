@@ -3,11 +3,13 @@ package com.inaya.stockmanagement.manager;
 import com.inaya.stockmanagement.dto.SupplierDTO;
 import com.inaya.stockmanagement.model.Supplier;
 import com.inaya.stockmanagement.service.supplier.SupplierService;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class SupplierManager {
 
     private final SupplierService supplierService;
