@@ -1,5 +1,6 @@
 package com.inaya.stockmanagement.manager;
 
+import com.inaya.stockmanagement.Exception.BaseException;
 import com.inaya.stockmanagement.dto.SupplierDTO;
 import com.inaya.stockmanagement.model.Supplier;
 import com.inaya.stockmanagement.service.supplier.SupplierService;
@@ -36,12 +37,19 @@ public class SupplierManager {
         supplier.setName(supplierDto.getName());
         supplier.setPhone(supplierDto.getPhone());
         supplier.setEmail(supplierDto.getEmail());
+        supplier.setAddress(supplierDto.getAddress());
         return modelToDto(supplierService.update(supplier));
     }
 
     public SupplierDTO getSupplierById(Long id) {
-        Optional<Supplier> supplier = supplierService.findById(id);
-        return supplier.map(this::modelToDto).orElseGet(null);
+
+        try{
+            Optional<Supplier> supplier = supplierService.findById(id);
+            return modelToDto(supplier.get());
+        }catch (Exception e){
+            throw new BaseException("Supplier with " + id + " doest not exists");
+        }
+
     }
 
     public List<SupplierDTO> getAllSupplier() {

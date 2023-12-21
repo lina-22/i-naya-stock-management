@@ -32,7 +32,7 @@ public class Supplier {
     private String phone;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Product> productSet;
 
 }
