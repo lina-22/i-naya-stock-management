@@ -30,6 +30,9 @@ public class Product implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image", length = 50000000)
+    private byte[] image;
+
     @Column(name = "buy_price")
     private BigDecimal buyPrice;
 

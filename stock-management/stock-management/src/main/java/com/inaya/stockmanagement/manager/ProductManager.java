@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -37,7 +38,7 @@ public class ProductManager {
     }
 
     @Transactional
-    public ResponseEntity<ProductResDTO> addProduct(ProductReqDTO productReqDTO) throws StockManagementException {
+    public ResponseEntity<ProductResDTO> addProduct(ProductReqDTO productReqDTO, MultipartFile image) throws StockManagementException {
         Optional<Category> category = categoryService.findById(productReqDTO.getCategoryId());
         Optional<Depot> depot = depotService.findById(productReqDTO.getCategoryId());
         Optional<Supplier> supplier = supplierService.findById(productReqDTO.getSupplierId());
@@ -71,6 +72,11 @@ public class ProductManager {
             productToAdd.setCost(productReqDTO.getCost());
             productToAdd.setMargin(productReqDTO.getMargin());
             productToAdd.setDescription(productReqDTO.getDescription());
+            try {
+            productToAdd.setImage(image.getBytes());
+            }catch (Exception e){
+                throw new BaseException("Something went wrong with the image of the product.");
+            }
             productToAdd.setStocks(List.of(addedStock));
             productToAdd.setCategory(category.get());
             productToAdd.setSupplier(supplier.get());
@@ -102,6 +108,7 @@ public class ProductManager {
         productResDTO.setId(product.getId());
         productResDTO.setName(product.getName());
         productResDTO.setDescription(product.getDescription());
+        productResDTO.setImage(product.getImage());
         productResDTO.setBuyPrice(product.getBuyPrice());
         productResDTO.setCost(product.getCost());
         productResDTO.setMargin(product.getMargin());

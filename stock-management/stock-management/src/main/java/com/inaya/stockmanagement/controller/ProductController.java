@@ -7,6 +7,7 @@ import com.inaya.stockmanagement.manager.ProductManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -22,9 +23,9 @@ public class ProductController {
     }
 
     @PostMapping(value = "/product")
-    public ResponseEntity<ProductResDTO> addCategory(@RequestBody ProductReqDTO productReqDTO) {
+    public ResponseEntity<ProductResDTO> addCategory(@RequestPart ProductReqDTO productReqDTO, @RequestPart MultipartFile image) {
         try {
-            return productManager.addProduct(productReqDTO);
+            return productManager.addProduct(productReqDTO, image);
         } catch (Exception e) {
             //Logger.getLogger(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -18,6 +18,8 @@ public class ProductResDTO {
 
     private String description;
 
+    private byte[] image;
+
     private BigDecimal buyPrice;
 
     private BigDecimal cost;
