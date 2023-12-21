@@ -21,7 +21,7 @@ public class DepotDTO {
 
     private String phone;
 
-    private List<Stock> stock;
+    private Set<Stock> stock;
 
     private List<Product> productList;
 

@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -50,16 +51,21 @@ public class Order {
 
     @PostLoad
     private void onLoad() {
-        this.priceWithVat = (BigDecimal) this.orderDetails
+        BigDecimal subTotal =  this.orderDetails
                 .stream()
                 .map(order ->
                         (order.getUnitPrice())
-                                .multiply(BigDecimal
-                                        .valueOf(order.getQuantity()))
-                                .multiply(BigDecimal.valueOf(this.vat)));
+                                .multiply(BigDecimal.valueOf(
+                                        order.getQuantity())))
+                .reduce(BigDecimal.valueOf(0), BigDecimal::add);
+                    BigDecimal productVat = subTotal.divide(BigDecimal.valueOf(vat));
+                    this.priceWithVat = subTotal.add(productVat);
+
     }
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
     private List<OrderDetails> orderDetails;
+
 }

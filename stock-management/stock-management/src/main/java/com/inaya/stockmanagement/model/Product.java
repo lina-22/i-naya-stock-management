@@ -19,6 +19,7 @@ import java.util.Set;
 @Table(name = "product")
 public class Product implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,20 +39,20 @@ public class Product implements Serializable {
     @Column(name = "margin")
     private BigDecimal margin;
 
-    // @JsonIgnore
+    @JsonIgnore
     //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private List<Stock> stocks;
 
     //@JsonIgnore
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    //@JsonIgnore
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "supplier_id", referencedColumnName = "id")
     private Supplier supplier;
 

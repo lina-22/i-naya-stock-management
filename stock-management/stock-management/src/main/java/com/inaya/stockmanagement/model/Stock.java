@@ -21,20 +21,7 @@ public class Stock {
     @Column(name = "quantity")
     private int quantity;
 
-    /*@JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "depot_id", referencedColumnName = "id")
-    private Depot depot;*/
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;
-
-    //@JsonIgnore
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "depot_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Depot depot;
 
 }

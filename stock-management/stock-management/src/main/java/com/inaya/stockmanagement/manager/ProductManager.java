@@ -41,7 +41,7 @@ public class ProductManager {
         Optional<Category> category = categoryService.findById(productReqDTO.getCategoryId());
         Optional<Depot> depot = depotService.findById(productReqDTO.getCategoryId());
         Optional<Supplier> supplier = supplierService.findById(productReqDTO.getSupplierId());
-       // Optional<Product> product = productService.findByName(productReqDTO.getName());
+        // Optional<Product> product = productService.findByName(productReqDTO.getName());
 
         /*product.ifPresent(value -> value.getStocks().forEach(data -> {
             if (Objects.equals(data.getDepot().getId(), productReqDTO.getDepotId())) {
@@ -61,7 +61,9 @@ public class ProductManager {
             Stock stock = new Stock();
             stock.setQuantity(productReqDTO.getQuantity());
             stock.setDepot(depot.get());
+            //stock.setProduct(addedProduct);
             Stock addedStock = stockService.add(stock);
+
 
             Product productToAdd = new Product();
             productToAdd.setName(productReqDTO.getName());
@@ -75,6 +77,7 @@ public class ProductManager {
 
             Product addedProduct = productService.add(productToAdd);
 
+
             Product product1 = productService.findById(addedProduct.getId()).get();
             return new ResponseEntity<>(toDto(product1), HttpStatus.CREATED);
         } else {
@@ -83,10 +86,15 @@ public class ProductManager {
 
     }
 
-    public List<ProductResDTO>getAllProduct(){
-        List<Product>productList = productService.getAll();
-        System.out.println("test here : + " + productList.toString());
+    public List<ProductResDTO> getAllProduct() {
+        List<Product> productList = productService.getAll();
+        //System.out.println("test here : + " + productList.toString());
         return productList.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
+    public ProductResDTO getProductById(Long id) {
+        Product product = productService.findById(id).get();
+        return toDto(product);
     }
 
     private ProductResDTO toDto(Product product) {

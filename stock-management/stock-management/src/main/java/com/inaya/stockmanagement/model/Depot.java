@@ -34,19 +34,9 @@ public class Depot {
     private String phone;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "depot", fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "depot_id", referencedColumnName = "id")
     private Set<Stock> stocks;
 
-    /*@OneToMany(mappedBy = "depot", fetch = FetchType.LAZY)
-    private List<Stock> stock;*/
-
-    /*@JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "depot_product",
-            joinColumns = @JoinColumn(name = "depot_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id")
-    )
-    private List<Product> productList;*/
 
 }

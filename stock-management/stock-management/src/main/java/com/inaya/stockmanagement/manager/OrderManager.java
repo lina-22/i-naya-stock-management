@@ -36,16 +36,16 @@ public class OrderManager {
     public ResponseEntity<OrderResDTO> saveOrder(OrderReqDTO orderReqDTO) {
 
         List<OrderDetails> orderDetailsListToAdd = new ArrayList<>();
-        orderReqDTO.getProducts().forEach((id, qty) -> {
+        orderReqDTO.getProducts().forEach((data) -> {
             OrderDetails orderDetails = new OrderDetails();
-            Product product = productService.getProductInfo(id);
+            Product product = productService.findById(data.getProductId()).get();
             System.out.println("prod info ****** ok / works : " + product.toString());
             orderDetails.setProductName(product.getName());
             orderDetails.setUnitPrice(
                     product.getBuyPrice()
                             .add(product.getCost())
                             .add(product.getMargin()));
-            orderDetails.setQuantity(qty);
+            orderDetails.setQuantity(data.getQuantity());
             orderDetailsListToAdd.add(orderDetails);
         });
         List<OrderDetails> addedOrderDetails = orderDetailsService.addAll(orderDetailsListToAdd);
@@ -69,6 +69,22 @@ public class OrderManager {
         orderResDTO.setOrderDetails(addedOrder.getOrderDetails());
 
         return new ResponseEntity<>(orderResDTO, HttpStatus.CREATED);
+    }
+
+    public ResponseEntity<List<OrderResDTO>>getAllOrder(){
+        List<Order> orders = orderService.getAll();
+        List<OrderResDTO>orderResDTOS = new ArrayList<>();
+        orders.stream().forEach(data->{
+            OrderResDTO orderResDTO= new OrderResDTO();
+            orderResDTO.setId(data.getId());
+            orderResDTO.setDate(data.getDateTime());
+            orderResDTO.setStatus(data.getStatus());
+            orderResDTO.setVat(data.getVat());
+            orderResDTO.setPriceWithVat(data.getPriceWithVat());
+            orderResDTO.setOrderDetails(data.getOrderDetails());
+            orderResDTOS.add(orderResDTO);
+        });
+        return new ResponseEntity<>(orderResDTOS, HttpStatus.OK);
     }
 
 
