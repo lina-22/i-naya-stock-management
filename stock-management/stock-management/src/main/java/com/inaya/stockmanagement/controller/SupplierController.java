@@ -2,6 +2,7 @@ package com.inaya.stockmanagement.controller;
 
 import com.inaya.stockmanagement.dto.SupplierDTO;
 import com.inaya.stockmanagement.manager.SupplierManager;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class SupplierController {
     }
 
     @PostMapping(value = "/supplier")
-    public SupplierDTO addSupplier(@RequestBody SupplierDTO supplierDTO) {
+    public ResponseEntity<SupplierDTO> addSupplier(@RequestBody SupplierDTO supplierDTO) {
         return supplierManager.saveSupplier(supplierDTO);
     }
 

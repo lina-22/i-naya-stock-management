@@ -27,7 +27,7 @@ public class Depot {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "phone")

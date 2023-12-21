@@ -1,5 +1,6 @@
 package com.inaya.stockmanagement.manager;
 
+import com.inaya.stockmanagement.Exception.BaseException;
 import com.inaya.stockmanagement.Exception.StockManagementException;
 import com.inaya.stockmanagement.dto.ProductReqDTO;
 import com.inaya.stockmanagement.dto.ProductResDTO;
@@ -40,9 +41,9 @@ public class ProductManager {
         Optional<Category> category = categoryService.findById(productReqDTO.getCategoryId());
         Optional<Depot> depot = depotService.findById(productReqDTO.getCategoryId());
         Optional<Supplier> supplier = supplierService.findById(productReqDTO.getSupplierId());
-        Optional<Product> product = productService.findByName(productReqDTO.getName());
+       // Optional<Product> product = productService.findByName(productReqDTO.getName());
 
-        product.ifPresent(value -> value.getStocks().forEach(data -> {
+        /*product.ifPresent(value -> value.getStocks().forEach(data -> {
             if (Objects.equals(data.getDepot().getId(), productReqDTO.getDepotId())) {
                 try {
                     throw new StockManagementException("Product already exists in "
@@ -52,7 +53,7 @@ public class ProductManager {
                     throw new RuntimeException(e);
                 }
             }
-        }));
+        }));*/
 
         if (category.isPresent() && depot.isPresent() && supplier.isPresent()) {
 
@@ -74,18 +75,17 @@ public class ProductManager {
 
             Product addedProduct = productService.add(productToAdd);
 
-
-
             Product product1 = productService.findById(addedProduct.getId()).get();
             return new ResponseEntity<>(toDto(product1), HttpStatus.CREATED);
         } else {
-            throw new StockManagementException("Something went wrong");
+            throw new BaseException("Category, Depot or Supplier not found");
         }
 
     }
 
     public List<ProductResDTO>getAllProduct(){
         List<Product>productList = productService.getAll();
+        System.out.println("test here : + " + productList.toString());
         return productList.stream().map(this::toDto).collect(Collectors.toList());
     }
 

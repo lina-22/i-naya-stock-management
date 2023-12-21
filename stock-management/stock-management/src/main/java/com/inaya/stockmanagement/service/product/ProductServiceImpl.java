@@ -1,5 +1,6 @@
 package com.inaya.stockmanagement.service.product;
 
+import com.inaya.stockmanagement.Exception.BaseException;
 import com.inaya.stockmanagement.model.Product;
 import com.inaya.stockmanagement.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,15 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public Product add(Product product) {
-        return productRepository.saveAndFlush(product);
+    public Product add(Product product) throws BaseException {
+        try {
+            return productRepository.saveAndFlush(product);
+        } catch (Exception e) {
+            throw new BaseException("Duplicate entry");
+        }
     }
+
+
 
     /**
      * @param product
@@ -32,6 +39,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product update(Product product) {
         return productRepository.saveAndFlush(product);
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @Override
+    public Product getProductInfo(Long id) {
+        return productRepository.getProductInfo(id);
     }
 
     /**

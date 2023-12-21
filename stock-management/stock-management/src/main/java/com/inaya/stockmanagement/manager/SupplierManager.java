@@ -3,6 +3,8 @@ package com.inaya.stockmanagement.manager;
 import com.inaya.stockmanagement.dto.SupplierDTO;
 import com.inaya.stockmanagement.model.Supplier;
 import com.inaya.stockmanagement.service.supplier.SupplierService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,13 +20,14 @@ public class SupplierManager {
         this.supplierService = supplierService;
     }
 
-    public SupplierDTO saveSupplier(SupplierDTO supplierDTO) {
+    public ResponseEntity<SupplierDTO> saveSupplier(SupplierDTO supplierDTO) {
         Supplier supplier = new Supplier();
         supplier.setName(supplierDTO.getName());
         supplier.setAddress(supplierDTO.getAddress());
         supplier.setEmail(supplierDTO.getEmail());
         supplier.setPhone(supplierDTO.getPhone());
-        return modelToDto(supplierService.add(supplier));
+        SupplierDTO addedSupplier = modelToDto(supplierService.add(supplier));
+        return new ResponseEntity<>(addedSupplier, HttpStatus.CREATED);
     }
 
     public SupplierDTO updateSupplier(SupplierDTO supplierDto) {
