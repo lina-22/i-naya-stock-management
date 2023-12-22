@@ -1,11 +1,12 @@
 import mainImg from "../../image/main-page/hero-img.jpg";
 import photoRight from "../../image/main-page/img-body-right.webp";
 import photoLeft from "../../image/main-page/img-body-left.jpg";
-import phOne from "../../image/body-image/photo-one.gif"
+import phOne from "../../image/body-image/photo-one.gif";
 import phTwo from "../../image/body-image/photo-two.gif";
 import phThree from "../../image/body-image/photo-three.gif";
 import phFour from "../../image/body-image/photo-four.gif";
 import "../css/Accueil.css";
+import { useEffect } from "react";
 
 function Accueil() {
   return (
@@ -15,14 +16,12 @@ function Accueil() {
         <h2 className="info_pub">
           La vie est devenue <br /> très facile
         </h2>
-        {/* <h3>Meilleures ventes de vêtements!</h3> */}
       </div>
       <div className="promo_trending">
         <section className="promotoion">
           <h4>
-          Gérez votre entreprise <br />
+            Gérez votre entreprise <br />
             <span>DE MANIERE PLUS EFFICACE</span>
-            {/* <span>Les Styles Du Moment</span> */}
           </h4>
         </section>
         <section className="trending">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getAllSupplier } from "../../service/SupplierService";
-import { Table, Form, Button } from "react-bootstrap";
+import { getAllSupplier } from "../../service/supplierService";
+import { Link } from "react-router-dom";
 
 export default function SupplierComponent() {
   const [suppliers, setSuppliers] = useState([]);
@@ -11,54 +11,46 @@ export default function SupplierComponent() {
 
   const getAllSupplierData = async () => {
     const res = await getAllSupplier();
-    console.log(res);
-
+    console.log(res.data);
     setSuppliers(res.data);
   };
 
   return (
-    <div>
-      <h1>SupplierComponent</h1>
-
-      <div>
-        <h2>Form For Add Supplier</h2>
-        <Form>
-          <input  placeholder="name" type="text"></input>
-          <input  placeholder="address" type="text"></input>
-          {/* <input onChange={(e)=>handle(e)} placeholder="email" type="text"></input> */}
-          {/* <input placeholder="phone number" type="text"></input> */}
-        </Form>
-        <Button variant="info">Info</Button>{' '}
-      </div>
-      
-      
-      <div  style={{ textAlign: "center" }}>
-        <h3>Show Supplier</h3>
-        <Table
-        
-          style={{ backgroundColor: "black", color: "white" }}
-        >
-          <thead style={{ textAlign: "center" }}>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {suppliers.map((supplier) => (
-              <tr key={supplier?.id}>
-                <td>{supplier?.id}</td>
-                <td>{supplier?.name}</td>
-                <td>{supplier?.address}</td>
-                <td>{supplier?.email}</td>
-
+    <div className="m-5">
+      <h1 className="pt-1 pb-4">Fournisseur</h1>
+      <table className="table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fournisseur</th>
+            <th scope="col">Adress</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {suppliers.map((supplier, id) => {
+            return (
+              <tr key={id}>
+                <th>{id + 1} </th>
+                <td>{supplier.name}</td>
+                <td>{supplier.address}</td>
+                <td>{supplier.email}</td>
+                <td>{supplier.phone}</td>
+                <td>
+                  <Link to={`/supplier/id=${supplier.id}`}>
+                    <button className="btn btn-primary m-1 p-1">
+                      Modifier
+                    </button>
+                  </Link>
+                  <button className="btn btn-danger p-1">Supprimer</button>
+                </td>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
