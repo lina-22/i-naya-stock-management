@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { getAllSupplier } from "../../service/supplierService";
+import { getSupplierById } from "../../service/supplierService";
 import { useParams } from "react-router-dom";
 
 export default function EditSupplierComponent() {
   const { id } = useParams();
-  const [suppliers, setSuppliers] = useState([]);
+  const [supplier, setSupplier] = useState("");
 
   useEffect(() => {
-    getAllSupplierData();
-    console.log("====================================");
-    console.log("test : ", id);
-    console.log("====================================");
+    getSupplierData();
   }, []);
 
-  const getAllSupplierData = async () => {
-    const res = await getAllSupplier();
+  const getSupplierData = async () => {
+    const res = await getSupplierById(id);
     console.log(res.data);
-    setSuppliers(res.data);
+    setSupplier(res.data);
   };
 
   return (

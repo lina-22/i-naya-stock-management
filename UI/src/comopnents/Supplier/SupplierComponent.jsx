@@ -39,7 +39,7 @@ export default function SupplierComponent() {
                 <td>{supplier.email}</td>
                 <td>{supplier.phone}</td>
                 <td>
-                  <Link to={`/supplier/id=${supplier.id}`}>
+                  <Link to={`/supplier/${supplier.id}`}>
                     <button className="btn btn-primary m-1 p-1">
                       Modifier
                     </button>

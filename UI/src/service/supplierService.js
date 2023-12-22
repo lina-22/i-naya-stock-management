@@ -12,3 +12,6 @@ export const addSupplier = (supplier) => {
 export const getAllSupplier = () => {
   return httpService.get(REACT_APP_SERVER_URL + API_EXT);
 };
+export const getSupplierById = (id) => {
+  return httpService.get(REACT_APP_SERVER_URL + API_EXT + `/${id}`);
+};
