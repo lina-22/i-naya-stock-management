@@ -23,19 +23,8 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto p-2">
             <li className="nav-item">
-              <Link
-                className="m-5"
-                style={{ textDecoration: "none" }}
-                to={"/supplier"}>
-                Fournisseur
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="m-5"
-                style={{ textDecoration: "none" }}
-                to={"/test"}>
-                Test
+              <Link className="m-5" style={{ textDecoration: "none" }} to={"/"}>
+                Acceuil
               </Link>
             </li>
             <li className="nav-item">

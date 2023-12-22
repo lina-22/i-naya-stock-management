@@ -64,12 +64,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Optional<Product> findById(Long id) {
-
-        System.out.println("prod id :" + id + "  *******************");
-        Optional<Product>product = productRepository.findById(id);
-        System.out.println("**********found prod : " + product.get().toString());
-        return product;
-        //return productRepository.findById(id);
+        return productRepository.findById(id);
     }
 
     /**

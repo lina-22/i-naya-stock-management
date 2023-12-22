@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllSupplier } from "../../service/supplierService";
+import { deleteSupplier, getAllSupplier } from "../../service/supplierService";
 import { Link } from "react-router-dom";
 
 export default function SupplierComponent() {
@@ -13,6 +13,11 @@ export default function SupplierComponent() {
     const res = await getAllSupplier();
     console.log(res.data);
     setSuppliers(res.data);
+  };
+  const handleDelete = async (id) => {
+    await deleteSupplier(id);
+    let newList = suppliers.filter((data) => data.id !== id);
+    setSuppliers(newList);
   };
 
   return (
@@ -40,11 +45,17 @@ export default function SupplierComponent() {
                 <td>{supplier.phone}</td>
                 <td>
                   <Link to={`/supplier/${supplier.id}`}>
-                    <button className="btn btn-primary m-1 p-1">
+                    <button className="btn btn-primary m-1 p-1" type="btn">
                       Modifier
                     </button>
                   </Link>
-                  <button className="btn btn-danger p-1">Supprimer</button>
+                  <button
+                    className="btn btn-danger p-1"
+                    type="btn"
+                    // onClick={handleDelete}
+                  >
+                    Supprimer
+                  </button>
                 </td>
               </tr>
             );
